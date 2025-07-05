@@ -79,7 +79,7 @@ require 'header.php';
                                                             <i class="far fa-eye"></i> Detail
                                                         </a>
                                                     </div>
-                                                    <?php if ($trans['status'] == 'selesai') { ?>
+                                                    <?php if ($trans['status'] == 'selesai' && $trans['status_bayar'] == 'dibayar') { ?>
                                                         <div class="form-button-action ml-3">
                                                             <a href="<?= "https://wa.me/" . $trans['telp_pelanggan'] . "?text=" .
                                                                             chat_pelanggan($trans['nama_pelanggan'], $trans['status'], $trans['total_harga']); ?>"
