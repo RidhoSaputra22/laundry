@@ -41,7 +41,7 @@ if (isset($_POST['btn-simpan'])) {
         $transaksi = mysqli_fetch_assoc($query6);
         $id_transaksi = $transaksi['id_transaksi'];
 
-        $query_detail = "INSERT INTO detail_transaksi (id_transaksi, id_paket, qty, total_harga) VALUES ('$id_transaksi', '$id_paket', '$qty', '$total')";
+        $query_detail = "INSERT INTO detail_transaksi (id_transaksi, id_paket, qty, keterangan, total_harga, total_bayar) VALUES ('$id_transaksi', '$id_paket', '$qty', '', '$total', 0)";
         $insert_detail = mysqli_query($conn, $query_detail);
         if ($insert_detail == 1) {
             // $_SESSION['msg'] = 'Berhasil menambahkan ';
@@ -95,15 +95,18 @@ require 'header.php';
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="largeInput">Kode Invoice</label>
-                                <input type="text" name="kode_invoice" class="form-control form-control" id="defaultInput" value="<?= $kode; ?>" readonly>
+                                <input type="text" name="kode_invoice" class="form-control form-control"
+                                    id="defaultInput" value="<?= $kode; ?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="largeInput">Outlet</label>
-                                <input type="text" name="" class="form-control form-control" id="defaultInput" value="<?= $outlet['nama_outlet']; ?>" readonly>
+                                <input type="text" name="" class="form-control form-control" id="defaultInput"
+                                    value="<?= $outlet['nama_outlet']; ?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="largeInput">Pelanggan</label>
-                                <input type="text" name="" class="form-control form-control" id="defaultInput" value="<?= $pelanggan['nama_pelanggan']; ?>" readonly>
+                                <input type="text" name="" class="form-control form-control" id="defaultInput"
+                                    value="<?= $pelanggan['nama_pelanggan']; ?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="defaultSelect">Pilih Paket</label>
@@ -119,20 +122,24 @@ require 'header.php';
                             </div>
                             <div class="form-group">
                                 <label for="largeInput">Biaya Tambahan</label>
-                                <input type="text" name="biaya_tambahan" class="form-control form-control" id="defaultInput" value="0">
+                                <input type="text" name="biaya_tambahan" class="form-control form-control"
+                                    id="defaultInput" value="0">
                             </div>
                             <div class="form-group">
                                 <label for="largeInput">Diskon (%)</label>
-                                <input type="text" name="diskon" class="form-control form-control" id="defaultInput" value="0">
+                                <input type="text" name="diskon" class="form-control form-control" id="defaultInput"
+                                    value="0">
                             </div>
                             <div class="form-group">
                                 <label for="largeInput">Pajak</label>
-                                <input type="text" name="pajak" class="form-control form-control" id="defaultInput" value="0">
+                                <input type="text" name="pajak" class="form-control form-control" id="defaultInput"
+                                    value="0">
                             </div>
                             <div class="card-action">
                                 <button type="submit" name="btn-simpan" class="btn btn-success">Submit</button>
                                 <!-- <button class="btn btn-danger">Cancel</button> -->
-                                <a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-danger">Batal</a>
+                                <a href="javascript:void(0)" onclick="window.history.back();"
+                                    class="btn btn-danger">Batal</a>
                             </div>
                     </form>
                 </div>
