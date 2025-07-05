@@ -12,7 +12,7 @@
 
 <body>
     <div class="w-full h-screen">
-        <div class="flex h-full flex-col md:flex-row overflow-hidden card-shadow">
+        <div class="flex h-full flex-col md:flex-row  card-shadow">
             <!-- Sidebar Biru -->
             <div class="bg-blue-800 text-white p-8 md:w-1/4 flex flex-col">
                 <div class="mb-8">
@@ -70,7 +70,7 @@
                             Aktif</span>
                     </div>
 
-                    <div class="space-y-4 overflow-y-scroll" id="laundryItems">
+                    <div class="space-y-4 " id="laundryItems">
                         <!-- Items will be loaded here -->
                     </div>
 
