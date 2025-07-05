@@ -1,0 +1,91 @@
+<?php
+$title = 'Edit Pemasukan';
+require 'koneksi.php';
+
+// Ambil data berdasarkan ID pemasukan
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']);
+    $query = "SELECT * FROM pemasukan WHERE id_pemasukan = $id";
+    $result = mysqli_query($conn, $query);
+    $pemasukan = mysqli_fetch_assoc($result);
+
+    if (!$pemasukan) {
+        $_SESSION['msg'] = "Data pemasukan tidak ditemukan!";
+        header("Location: pemasukan.php");
+        exit;
+    }
+} else {
+    header("Location: pemasukan.php");
+    exit;
+}
+
+// Proses update data
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $tanggal = mysqli_real_escape_string($conn, $_POST['tanggal']);
+    $keterangan = mysqli_real_escape_string($conn, $_POST['keterangan']);
+    $jumlah = mysqli_real_escape_string($conn, $_POST['jumlah']);
+
+    $updateQuery = "UPDATE pemasukan SET tanggal = '$tanggal', keterangan = '$keterangan', jumlah = '$jumlah' WHERE id_pemasukan = $id";
+    if (mysqli_query($conn, $updateQuery)) {
+        $_SESSION['msg'] = "Pemasukan berhasil diperbarui!";
+        header("Location: pemasukan.php");
+        exit;
+    } else {
+        $_SESSION['msg'] = "Gagal memperbarui pemasukan: " . mysqli_error($conn);
+    }
+}
+
+require 'header.php';
+?>
+
+<div class="panel-header bg-primary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <h2 class="text-white pb-2 fw-bold">Edit Pemasukan</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-inner mt--5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <?php if (isset($_SESSION['msg']) && $_SESSION['msg'] != '') { ?>
+                        <div class="alert alert-info">
+                            <?= $_SESSION['msg']; ?>
+                        </div>
+                    <?php
+                        $_SESSION['msg'] = '';
+                    } ?>
+                    <form method="POST" action="">
+                        <div class="form-group">
+                            <label for="tanggal">Tanggal</label>
+                            <input type="date" class="form-control" id="tanggal" name="tanggal"
+                                value="<?= $pemasukan['tanggal']; ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="keterangan">Keterangan</label>
+                            <input type="text" class="form-control" id="keterangan" name="keterangan"
+                                value="<?= $pemasukan['keterangan']; ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="jumlah">Jumlah</label>
+                            <input type="number" class="form-control" id="jumlah" name="jumlah"
+                                value="<?= $pemasukan['jumlah']; ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <a href="pemasukan.php" class="btn btn-secondary">Kembali</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+require 'footer.php';
+?>
