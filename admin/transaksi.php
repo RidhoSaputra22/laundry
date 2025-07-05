@@ -20,7 +20,7 @@ require 'header.php';
             </div>
         </div>
         <?php if (isset($_GET['msg'])) : ?>
-        <div class="alert alert-success" id="msg"><?= $_GET['msg'] ?></div>
+            <div class="alert alert-success" id="msg"><?= $_GET['msg'] ?></div>
         <?php endif ?>
     </div>
 </div>
@@ -63,45 +63,36 @@ require 'header.php';
                                     while ($trans = mysqli_fetch_assoc($data)) {
                                 ?>
 
-                                <tr>
-                                    <td><?= $no++; ?></td>
-                                    <td><?= $trans['kode_invoice']; ?></td>
-                                    <td><?= $trans['nama_pelanggan']; ?></td>
-                                    <td><?= $trans['status']; ?></td>
-                                    <td><?= $trans['status_bayar']; ?></td>
-                                    <td><?= 'Rp ' . number_format($trans['total_harga']); ?></td>
-                                    <td>
-                                        <div class="form-button-action ">
-                                            <div class="form-button-action">
-                                                <a href="detail.php?id=<?= $trans['id_transaksi']; ?>" type="button"
-                                                    data-toggle="tooltip" title="" class="btn btn-primary"
-                                                    data-original-title="Detail">
-                                                    <i class="far fa-eye"></i> Detail
-                                                </a>
-                                            </div>
-                                            <?php if ($trans['status'] == 'selesai' && $trans['status_bayar'] == 'dibayar') { ?>
-                                            <div class="form-button-action ml-3">
-                                                <a href="<?= "https://wa.me/" . $trans['telp_pelanggan'] . "?text=" .
-                                                                            chat_pelanggan($trans['nama_pelanggan'], $trans['status'], $trans['total_harga']); ?>"
-                                                    target=" _blank" data-toggle="tooltip" title=""
-                                                    class="btn btn-secondary" data-original-title="Chat Pelanggan">
-                                                    <i class="far fa-edit"></i> Chat Pelanggan
-                                                </a>
-                                            </div>
-                                            <?php }else{ ?>
-                                            <div class="form-button-action ml-3">
-                                                <button onclick="alert('Transaksi belum selesai atau belum dibayar!')"
-                                                    type="button" data-toggle="tooltip" title=""
-                                                    class="btn btn-secondary" data-original-title="Chat Pelanggan">
-                                                    <i class="far fa-edit"></i> Chat Pelanggan
-                                                </button>
-                                            </div>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $trans['kode_invoice']; ?></td>
+                                            <td><?= $trans['nama_pelanggan']; ?></td>
+                                            <td><?= $trans['status']; ?></td>
+                                            <td><?= $trans['status_bayar']; ?></td>
+                                            <td><?= 'Rp ' . number_format($trans['total_harga']); ?></td>
+                                            <td>
+                                                <div class="form-button-action ">
+                                                    <div class="form-button-action">
+                                                        <a href="detail.php?id=<?= $trans['id_transaksi']; ?>" type="button"
+                                                            data-toggle="tooltip" title="" class="btn btn-primary"
+                                                            data-original-title="Detail">
+                                                            <i class="far fa-eye"></i> Detail
+                                                        </a>
+                                                    </div>
+                                                    <?php if ($trans['status'] == 'selesai') { ?>
+                                                        <div class="form-button-action ml-3">
+                                                            <a href="<?= "https://wa.me/" . $trans['telp_pelanggan'] . "?text=" .
+                                                                            chat_pelanggan($trans); ?>"
+                                                                target=" _blank" data-toggle="tooltip" title=""
+                                                                class="btn btn-secondary" data-original-title="Chat Pelanggan">
+                                                                <i class="far fa-edit"></i> Chat Pelanggan
+                                                            </a>
+                                                        </div>
+                                                    <?php } ?>
 
-                                            <?php }?>
-
-                                        </div>
-                                    </td>
-                                </tr>
+                                                </div>
+                                            </td>
+                                        </tr>
                                 <?php }
                                 }
                                 ?>
