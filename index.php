@@ -70,7 +70,7 @@
                             Aktif</span>
                     </div>
 
-                    <div class="space-y-4" id="laundryItems">
+                    <div class="space-y-4 overflow-y-scroll" id="laundryItems">
                         <!-- Items will be loaded here -->
                     </div>
 
