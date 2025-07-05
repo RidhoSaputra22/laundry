@@ -6,9 +6,10 @@ if (isset($_POST['btn-simpan'])) {
     $nama = $_POST['nama_pelanggan'];
     $alamat = $_POST['alamat_pelanggan'];
     $no_ktp = $_POST['no_ktp'];
-    $telp = $_POST['telp_pelanggan'];
+    $telp = convertToIndoPhoneFormat($_POST['telp_pelanggan'] ?? '');
+    $password = $_POST['password'];
     $jenis_kelamin = $_POST['jenis_kelamin'];
-    $query = "INSERT INTO pelanggan (nama_pelanggan, alamat_pelanggan, no_ktp, telp_pelanggan, jenis_kelamin) values ('$nama', '$alamat', '$no_ktp', '$telp', '$jenis_kelamin')";
+    $query = "INSERT INTO pelanggan (nama_pelanggan, alamat_pelanggan, no_ktp, telp_pelanggan, jenis_kelamin, password) values ('$nama', '$alamat', '$no_ktp', '$telp', '$jenis_kelamin', '$password')";
 
     $insert = mysqli_query($conn, $query);
     if ($insert == 1) {
@@ -56,11 +57,13 @@ require 'header.php';
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="largeInput">No KTP Pelanggan</label>
-                                <input type="text" name="no_ktp" class="form-control form-control" id="defaultInput" placeholder="No KTP..." maxlength="20">
+                                <input type="text" name="no_ktp" class="form-control form-control" id="defaultInput"
+                                    placeholder="No KTP..." maxlength="20">
                             </div>
                             <div class="form-group">
                                 <label for="largeInput">Nama Pelanggan</label>
-                                <input type="text" name="nama_pelanggan" class="form-control form-control" id="defaultInput" placeholder="Nama...">
+                                <input type="text" name="nama_pelanggan" class="form-control form-control"
+                                    id="defaultInput" placeholder="Nama...">
                             </div>
                             <div class="form-group">
                                 <label for="alamat">Alamat Pelanggan</label>
@@ -68,7 +71,8 @@ require 'header.php';
                             </div>
                             <div class="form-group">
                                 <label for="largeInput">No Telepon</label>
-                                <input type="text" name="telp_pelanggan" class="form-control form-control" id="defaultInput" placeholder="No Telp...">
+                                <input type="text" name="telp_pelanggan" class="form-control form-control"
+                                    id="defaultInput" placeholder="No Telp...">
                             </div>
                             <div class="form-group">
                                 <label for="defaultSelect">Jenis Kelamin</label>
@@ -77,10 +81,15 @@ require 'header.php';
                                     <option value="P">Perempuan</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="largeInput">Password</label>
+                                <input type="text" name="password" class="form-control form-control" id="defaultInput">
+                            </div>
                             <div class="card-action">
                                 <button type="submit" name="btn-simpan" class="btn btn-success">Submit</button>
                                 <!-- <button class="btn btn-danger">Cancel</button> -->
-                                <a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-danger">Batal</a>
+                                <a href="javascript:void(0)" onclick="window.history.back();"
+                                    class="btn btn-danger">Batal</a>
                             </div>
                     </form>
                 </div>

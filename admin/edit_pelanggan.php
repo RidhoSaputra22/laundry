@@ -10,9 +10,10 @@ if (isset($_POST['btn-simpan'])) {
     $nama = $_POST['nama_pelanggan'];
     $alamat = $_POST['alamat_pelanggan'];
     $no_ktp = $_POST['no_ktp'];
+    $password = $_POST['password'];
     $telp = $_POST['telp_pelanggan'];
     $jenis_kelamin = $_POST['jenis_kelamin'];
-    $query = "UPDATE pelanggan SET nama_pelanggan = '$nama', alamat_pelanggan = '$alamat', no_ktp = '$no_ktp', telp_pelanggan = '$telp', jenis_kelamin = '$jenis_kelamin' WHERE id_pelanggan = $id";
+    $query = "UPDATE pelanggan SET nama_pelanggan = '$nama', alamat_pelanggan = '$alamat', no_ktp = '$no_ktp', telp_pelanggan = '$telp', jenis_kelamin = '$jenis_kelamin', password = '$password' WHERE id_pelanggan = $id";
 
     $update = mysqli_query($conn, $query);
     if ($update == 1) {
@@ -62,19 +63,23 @@ require 'header.php';
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="largeInput">No KTP Pelanggan</label>
-                                    <input type="text" name="no_ktp" class="form-control form-control" id="defaultInput" value="<?= $edit['no_ktp']; ?>" placeholder="No KTP...">
+                                    <input type="text" name="no_ktp" class="form-control form-control" id="defaultInput"
+                                        value="<?= $edit['no_ktp']; ?>" placeholder="No KTP...">
                                 </div>
                                 <div class="form-group">
                                     <label for="largeInput">Nama Pelanggan</label>
-                                    <input type="text" name="nama_pelanggan" class="form-control form-control" id="defaultInput" value="<?= $edit['nama_pelanggan']; ?>" placeholder="Nama...">
+                                    <input type="text" name="nama_pelanggan" class="form-control form-control"
+                                        id="defaultInput" value="<?= $edit['nama_pelanggan']; ?>" placeholder="Nama...">
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat">Alamat Pelanggan</label>
-                                    <textarea class="form-control" rows="5" name="alamat_pelanggan"><?= $edit['alamat_pelanggan']; ?></textarea>
+                                    <textarea class="form-control" rows="5"
+                                        name="alamat_pelanggan"><?= $edit['alamat_pelanggan']; ?></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="largeInput">No Telepon</label>
-                                    <input type="text" name="telp_pelanggan" class="form-control form-control" id="defaultInput" value="<?= $edit['telp_pelanggan']; ?>" placeholder="No Telp...">
+                                    <input type="text" name="telp_pelanggan" class="form-control form-control"
+                                        id="defaultInput" value="<?= $edit['telp_pelanggan']; ?>" placeholder="No Telp...">
                                 </div>
                                 <div class="form-group">
                                     <label for="defaultSelect">Jenis Kelamin</label>
@@ -87,10 +92,16 @@ require 'header.php';
                                                             } ?>>Perempuan</option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="largeInput">Password</label>
+                                    <input type="text" name="password" class="form-control form-control" id="defaultInput"
+                                        value="<?= $edit['password']; ?>">
+                                </div>
                                 <div class="card-action">
                                     <button type="submit" name="btn-simpan" class="btn btn-success">Submit</button>
                                     <!-- <button class="btn btn-danger">Cancel</button> -->
-                                    <a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-danger">Batal</a>
+                                    <a href="javascript:void(0)" onclick="window.history.back();"
+                                        class="btn btn-danger">Batal</a>
                                 </div>
                         </form>
                 </div>
